@@ -1,0 +1,22 @@
+{
+    "name": "wavecf",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "esbuild index.ts --bundle --outfile=index.js",
+        "build:run": "esbuild index.ts --bundle --outfile=index.js && node index.js",
+        "ts:run": "ts-node --swc index.ts"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@swc/core": "^1.2.213",
+        "esbuild": "^0.14.49"
+    },
+    "devDependencies": {
+        "ts-node": "^10.8.2",
+        "typescript": "^4.7.4"
+    }
+}
