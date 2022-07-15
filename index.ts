@@ -31,7 +31,7 @@ let empty = new Rule(' ', [0, 0, 0, 0]);
  nice seeds
  */
 
-let genBorder = new Generator(10, 20, [tlbr, lbr, tlb, tbr, tlr, tl, lb, br, tr, tb, lr, empty], false, 75);
+let genBorder = new Generator(10, 20, [tlbr, lbr, tlb, tbr, tlr, tl, lb, br, tr, tb, lr, empty], false, 5);
 
 genBorder.run();
 

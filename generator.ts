@@ -8,8 +8,9 @@ type Coordinate = [number, number];
 type HashSet = [key: Coordinate];
 
 export class Generator {
-    grid: Grid = [];
-    waves = new ArraySet();
+    private grid: Grid = [];
+    private waves = new ArraySet();
+    private randomGen: (r: number) => number;
 
     constructor(
         private height: number,
@@ -18,9 +19,10 @@ export class Generator {
         private debug: boolean = false,
         private seed: number = 0
     ) {
-        if (this.seed === 0) {
-            this.seed = Math.floor(Math.random() * 100);
-            console.log(`seed: ${this.seed}`);
+        if (this.seed > 0) {
+            this.randomGen = (r: number) => mulberry32(this.seed * r);
+        } else {
+            this.randomGen = (_: number) => Math.random();
         }
     }
 
@@ -84,12 +86,12 @@ export class Generator {
     }
 
     getRandomStartCell() {
-        const x = Math.floor(mulberry32(this.seed * 111) * this.width);
-        const y = Math.floor(mulberry32(this.seed * 222) * this.height);
+        const x = Math.floor(this.randomGen(123) * this.width);
+        const y = Math.floor(this.randomGen(321) * this.height);
         return [x, y];
     }
     getRandomCellFromWaves(): Coordinate {
-        const randomIndex = Math.floor(mulberry32(this.seed * 333) * this.waves.size);
+        const randomIndex = Math.floor(this.randomGen(444) * this.waves.size);
         const random = this.waves.get(randomIndex) as any;
         return random;
     }
@@ -136,7 +138,7 @@ export class Generator {
     }
 
     getRandomRule(rules: Rule[]) {
-        const randomIndex = Math.floor(mulberry32(this.seed * 444) * rules.length);
+        const randomIndex = Math.floor(this.randomGen(5486) * rules.length);
         return rules[randomIndex];
     }
 
